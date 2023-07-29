@@ -4,7 +4,10 @@ from PyQt5.QtCore import *
 
 from PyQt5.QtWidgets import *
 
+from PyQt5.QtGui import *
+
 from PyQt5.QtWebEngineWidgets import *
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -14,32 +17,43 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.browser)
         self.showMaximized()
 
+        # self.browser.page().profile().downloadRequested.connect(self.on_download_requested)
+        #
+        # def on_download_requested(self, download: QWebEngineDownloadItem):
+        #     download.setPath('C:\Users\ayush\PycharmProjects\ChiBrowser\icons++')  # Set the desired file path to save the downloaded file
+        #     download.accept()
 
         navbar = QToolBar()
         self.addToolBar(navbar)
 
         code_explain = QAction('CODE EXPLAINER', self)
         code_explain.triggered.connect(self.explainer)
+        code_explain.setIcon(QIcon('icons++/code.png'))
         navbar.addAction(code_explain)
 
         word_pdf = QAction('WORD 2 PDF', self)
         word_pdf.triggered.connect(self.open_converter)
+        word_pdf.setIcon(QIcon('icons++/change.png'))
         navbar.addAction(word_pdf)
-
-        home_btn = QAction('Home', self)
-        home_btn.triggered.connect(self.navigate_home)
-        navbar.addAction(home_btn)
 
         back_btn = QAction('Back', self)
         back_btn.triggered.connect(self.browser.back)
+        back_btn.setIcon(QIcon('icons++/back.png'))
         navbar.addAction(back_btn)
+
+        home_btn = QAction('Home', self)
+        home_btn.triggered.connect(self.navigate_home)
+        home_btn.setIcon(QIcon('icons++/home.png'))
+        navbar.addAction(home_btn)
 
         forward_btn = QAction('Forward', self)
         forward_btn.triggered.connect(self.browser.forward)
+        forward_btn.setIcon(QIcon('icons++/forward.png'))
         navbar.addAction(forward_btn)
 
         reload_btn = QAction('Reload', self)
         reload_btn.triggered.connect(self.browser.reload)
+        reload_btn.setIcon(QIcon('icons++/reload.png'))
         navbar.addAction(reload_btn)
 
         self.url_bar = QLineEdit()
